@@ -1,6 +1,6 @@
 import httpclient, os, parseopt, strutils
 
-type URLArray = array[4, string]
+type URLArray = array[5, string]
 
 proc writeHelp() =
   echo """
@@ -35,7 +35,8 @@ proc cli() =
     "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.prettierrc.js",
     "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.editorconfig",
     "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.eslintrc.js",
-    "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.prettierignore"
+    "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.prettierignore",
+    "https://raw.githubusercontent.com/othneildrew/Best-README-Template/master/README.md"
   ]
 
   if paramCount() == 0:
