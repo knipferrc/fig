@@ -4,7 +4,7 @@ type URLArray = array[4, string]
 
 proc writeHelp() =
   echo """
-  README Fig (download common config files)
+  Fig (download common config files)
 
   Allowed arguments:
 
@@ -14,7 +14,7 @@ proc writeHelp() =
     """
 
 proc writeVersion() =
-  echo "README Template Downloader 0.1.0"
+  echo "FIG config file downloader 0.1.0"
 
 proc downloadFile(urls: URLArray) =
   for url in urls:
