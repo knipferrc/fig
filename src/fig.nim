@@ -1,6 +1,6 @@
 import httpclient, os, parseopt, strutils
 
-type URLArray = array[5, string]
+import types
 
 proc writeHelp() =
   echo """
