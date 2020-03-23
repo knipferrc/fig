@@ -10,7 +10,14 @@ proc writeHelp() =
 
   - h | --help : show help
   - v | --version : show version
-  - d | --default : dowloads "basic configs for javascript projects"
+  - d | --default : dowloads "basic configs for different projects"
+  - t | --template : downloads configs based on a template
+                      
+      Available templates
+      ---------------------
+      -t=react-typescript
+      -t=react-javascript
+      -t=svelte
     """
 
 proc writeVersion() =
@@ -29,6 +36,8 @@ proc downloadTemplate(urls: seq[string]) =
       echo("Success - downloaded file to " & fileName)
     except IOError as err:
       echo("Failed to download file: " & err.msg)
+
+  echo("Success, finished generating configs")
 
 proc cli() =
   var currentTemplate = "react-javascript"
