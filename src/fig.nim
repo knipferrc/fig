@@ -1,6 +1,6 @@
 import httpclient, os, parseopt, strutils
 
-import types
+import projecttypes
 
 proc writeHelp() =
   echo """
@@ -16,7 +16,7 @@ proc writeHelp() =
 proc writeVersion() =
   echo "FIG config file downloader 0.1.0"
 
-proc downloadFile(urls: URLArray) =
+proc downloadTemplate(urls: seq[string]) =
   for url in urls:
     let splitUrl = url.split('/')
     let fileName = splitUrl[splitUrl.len() - 1]
@@ -26,18 +26,12 @@ proc downloadFile(urls: URLArray) =
       var file = open(fileName, fmWrite)
       defer: file.close()
       file.write(client.getContent(url))
-      echo("Success - downloaded template to " & fileName)
+      echo("Success - downloaded file to " & fileName)
     except IOError as err:
-      echo("Failed to download template: " & err.msg)
+      echo("Failed to download file: " & err.msg)
 
 proc cli() =
-  var urls: URLArray = [
-    "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.prettierrc.js",
-    "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.editorconfig",
-    "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.eslintrc.js",
-    "https://raw.githubusercontent.com/knipferrc/fig/master/configs/.prettierignore",
-    "https://raw.githubusercontent.com/othneildrew/Best-README-Template/master/README.md"
-  ]
+  var currentTemplate = "react-javascript"
 
   if paramCount() == 0:
     writeHelp()
@@ -54,12 +48,24 @@ proc cli() =
         writeVersion()
         quit()
       of "d", "default": discard
+      of "t", "template":
+        echo val
+        currentTemplate = val
       else:
         discard
     else:
       discard
 
-    downloadFile(urls)
+  case currentTemplate
+  of "react-typescript":
+    downloadTemplate(reactTypescriptTemplate)
+  of "react-javascript":
+    downloadTemplate(reactJavascriptTemplate)
+  of "svelte":
+    downloadTemplate(svelteTemplate)
+  else:
+    echo("Invalid template")
+    quit(0)
 
 when isMainModule:
   cli()
