@@ -1,6 +1,6 @@
-import httpclient, os, parseopt, strutils
+import os, parseopt
 
-import projecttypes
+import templates
 
 proc writeHelp() =
   echo """
@@ -23,19 +23,15 @@ proc writeHelp() =
 proc writeVersion() =
   echo "FIG config file downloader 0.1.0"
 
-proc downloadTemplate(urls: seq[string]) =
-  for url in urls:
-    let splitUrl = url.split('/')
-    let fileName = splitUrl[splitUrl.len() - 1]
-
-    var client = newHttpClient()
+proc writeConfigs(configs: seq[Template]) =
+  for config in configs:
     try:
-      var file = open(fileName, fmWrite)
+      var file = open(config.filename, fmWrite)
       defer: file.close()
-      file.write(client.getContent(url))
-      echo("Success - downloaded file to " & fileName)
+      file.write(config.content)
+      echo("Success - wrote config to " & config.filename)
     except IOError as err:
-      echo("Failed to download file: " & err.msg)
+      echo("Failed to generate config: " & err.msg)
 
   echo("Success, finished generating configs")
 
@@ -66,12 +62,12 @@ proc cli() =
       discard
 
   case currentTemplate
-  of "react-typescript":
-    downloadTemplate(reactTypescriptTemplate)
   of "react-javascript":
-    downloadTemplate(reactJavascriptTemplate)
+    writeConfigs(reactJavascriptTemplate)
+  of "react-typescript":
+    writeConfigs(reactTypescriptTemplate)
   of "svelte":
-    downloadTemplate(svelteTemplate)
+    writeConfigs(svelteTemplate)
   else:
     echo("Invalid template")
     quit(0)
