@@ -1,4 +1,4 @@
-![Build Native](https://github.com/knipferrc/fig/workflows/Build%20Native/badge.svg)
+![Release](https://github.com/knipferrc/fig/workflows/Release/badge.svg)
 
 <p align="center">
   <h1 align="center">FIG</h3>
