@@ -52,4 +52,7 @@ jobs:
       with:
         name: fig
         path: rel
+    - name: github-action-publish-binaries
+      uses: skx/github-action-publish-binaries@release-1.3
+
 
