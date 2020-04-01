@@ -1,3 +1,5 @@
+![Build Native](https://github.com/knipferrc/fig/workflows/Build%20Native/badge.svg)
+
 <p align="center">
   <h1 align="center">FIG</h3>
 
