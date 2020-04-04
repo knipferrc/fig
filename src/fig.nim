@@ -21,7 +21,7 @@ proc writeHelp() =
     """
 
 proc writeVersion() =
-  echo "FIG config file downloader 0.1.0"
+  echo "FIG config file downloader 0.0.2"
 
 proc writeConfigs(configs: seq[Template]) =
   for config in configs:
